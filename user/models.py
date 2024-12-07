@@ -25,6 +25,4 @@ class Patient(models.Model):
     def create_or_update_patient_profile(sender, instance, created, **kwargs):
         if created:
             Patient.objects.create(user=instance)
-        else:
-            instance.patient_profile.save()
 
