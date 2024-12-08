@@ -23,4 +23,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("",home,name='home'),
     path("user/",include('user.urls')),
+    path("nutri_need_home/",include('nutri_needs.urls')),
 ]
+
