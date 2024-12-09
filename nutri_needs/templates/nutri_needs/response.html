@@ -19,8 +19,12 @@
         <li>Other Conditions: {{ customer_data.other_conditions }}</li>
     </ul>
 
-    <h2>Analysis Result</h2>
-    <p>{{ response }}</p>
+    <h1>Nutrition Needs Analysis</h1>
+    <ul>
+        {% for item in response_list %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
 
     <a href="/">Back to Input</a>
 </body>

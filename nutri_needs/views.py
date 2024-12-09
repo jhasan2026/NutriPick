@@ -1,16 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse 
-from .forms import UserInputForm
-from .models import UserInput
 from .forms import CustomerForm
 import cohere
+from .forms import  CustomerForm
+from .models import  CustomerData
+import re
 
-
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
-from .forms import UserInputForm, CustomerForm
-from .models import UserInput, CustomerData
-import cohere
 
 # Initialize Cohere client
 cohere_client = cohere.Client('qcytX68hUTdhqabTQwkdlY5IVbQhOAWHDRi0k3Nv')
@@ -33,6 +28,7 @@ def customer_input(request):
     else:
         form = CustomerForm()
     return render(request, 'nutri_needs/health_form.html', {'form': form})
+
 
 
 def analyze_data(request):
@@ -94,18 +90,20 @@ def analyze_data(request):
 
     # Call Cohere API
     response = cohere_client.generate(
-        model='command-xlarge-nightly',  # Replace with your preferred model
+        model='command-xlarge-nightly',  
         prompt=prompt,
         max_tokens=1000
     )
     output = response.generations[0].text.strip()
 
-    # Render response.html with the user data and AI response
+    # Split response into list items
+    list_items = output.split('\n')  # Split by newlines if the API format uses them
+    list_items = [item.strip() for item in list_items if item.strip()]  # Remove empty or extra spaces
+
     return render(request, 'nutri_needs/response.html', {
-        'response': output,
+        'response_list': list_items,
         'customer_data': customer_data
     })
-
 
 
 
