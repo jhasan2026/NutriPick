@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Success</title>
-    <!-- Import Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Import Flowbite CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@1.6.6/dist/flowbite.min.css" rel="stylesheet" />
-</head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+{% extends 'user/BASE.html' %}
+
+{% block content %}
+<!-- Main Container Wrapper to Center the Data Block -->
+<div class="flex items-center justify-center min-h-screen bg-gray-50">
 
     <!-- Main Container -->
     <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
@@ -42,7 +36,5 @@
 
     </div>
 
-    <!-- Flowbite JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.6/dist/flowbite.min.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}

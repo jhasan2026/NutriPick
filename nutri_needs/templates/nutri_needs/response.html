@@ -1,18 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Response</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-</head>
+{% extends 'user/BASE.html' %}
+
+{% block content %}
+
 <body class="bg-gray-50 text-gray-800">
-    <header class="bg-blue-600 text-white py-4">
-        <div class="container mx-auto text-center">
-            <h1 class="text-2xl font-bold">AI Response</h1>
-        </div>
-    </header>
 
     <main class="container mx-auto my-8 px-4">
         <!-- Customer Data Section -->
@@ -53,4 +43,5 @@
         </div>
     </footer>
 </body>
-</html>
+
+{% endblock %}
