@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Response</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 </head>
-<body>
-    <h1>AI Response</h1>
+<body class="bg-gray-50 text-gray-800">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-2xl font-bold">AI Response</h1>
+        </div>
+    </header>
 
-    <h2>Customer Data</h2>
-    <ul>
-        <li>Age: {{ customer_data.age }}</li>
-        <li>Height: {{ customer_data.height_foot }}' {{ customer_data.height_inch }}"</li>
-        <li>Weight: {{ customer_data.weight }} kg</li>
-        <li>Respiratory Problem: {{ customer_data.respiratory_problem }}</li>
-        <li>Diabetics: {{ customer_data.diabetics }}</li>
-        <li>High Blood Pressure: {{ customer_data.high_blood_pressure }}</li>
-        <li>Heart Problem: {{ customer_data.heart_problem }}</li>
-        <li>Constipation: {{ customer_data.constipation }}</li>
-        <li>Other Conditions: {{ customer_data.other_conditions }}</li>
-    </ul>
+    <main class="container mx-auto my-8 px-4">
+        <!-- Customer Data Section -->
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold text-blue-600 mb-4">Customer Data</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                <li><strong>Age:</strong> {{ customer_data.age }}</li>
+                <li><strong>Height:</strong> {{ customer_data.height_foot }}' {{ customer_data.height_inch }}"</li>
+                <li><strong>Weight:</strong> {{ customer_data.weight }} kg</li>
+                <li><strong>Respiratory Problem:</strong> {{ customer_data.respiratory_problem }}</li>
+                <li><strong>Diabetics:</strong> {{ customer_data.diabetics }}</li>
+                <li><strong>High Blood Pressure:</strong> {{ customer_data.high_blood_pressure }}</li>
+                <li><strong>Heart Problem:</strong> {{ customer_data.heart_problem }}</li>
+                <li><strong>Constipation:</strong> {{ customer_data.constipation }}</li>
+                <li><strong>Other Conditions:</strong> {{ customer_data.other_conditions }}</li>
+            </ul>
+        </section>
 
-    <h1>Nutrition Needs Analysis</h1>
-    <ul>
-        {% for item in response_list %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Nutrition Needs Analysis Section -->
+        <section class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl font-semibold text-blue-600 mb-4">Nutrition Needs Analysis</h2>
+            <ul class="list-disc pl-6 space-y-2">
+                {% for item in response_list %}
+                    <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </section>
 
-    <a href="/">Back to Input</a>
+        <!-- Back to Input Button -->
+        <div class="text-center mt-8">
+            <a href="/" class="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none">Back to Input</a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 py-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p class="text-sm text-gray-600">&copy; 2024 Nutrition Analysis App</p>
+        </div>
+    </footer>
 </body>
 </html>
