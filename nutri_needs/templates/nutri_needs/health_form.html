@@ -1,14 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer Input</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Enter Customer Data</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Enter Customer Data</h1>
+        <form method="POST" class="bg-white p-6 rounded-lg shadow-md space-y-4">
+            {% csrf_token %}
+
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input type="number" id="age" name="age" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="height_foot" class="block text-sm font-medium text-gray-700">Height - Feet</label>
+                    <input type="number" id="height_foot" name="height_foot" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="height_inch" class="block text-sm font-medium text-gray-700">Height - Inches</label>
+                    <input type="number" id="height_inch" name="height_inch" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+
+            <div>
+                <label for="weight" class="block text-sm font-medium text-gray-700">Weight (kg)</label>
+                <input type="number" step="0.1" id="weight" name="weight" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <fieldset class="space-y-2">
+                <legend class="text-sm font-medium text-gray-700">Medical Conditions</legend>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="respiratory_problem" name="respiratory_problem" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="respiratory_problem" class="ml-2 block text-sm text-gray-800">Respiratory Problem</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="diabetics" name="diabetics" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="diabetics" class="ml-2 block text-sm text-gray-800">Diabetics</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="high_blood_pressure" name="high_blood_pressure" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="high_blood_pressure" class="ml-2 block text-sm text-gray-800">High Blood Pressure</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="heart_problem" name="heart_problem" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="heart_problem" class="ml-2 block text-sm text-gray-800">Heart Problem</label>
+                </div>
+
+                <div class="flex items-center">
+                    <input type="checkbox" id="constipation" name="constipation" class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                    <label for="constipation" class="ml-2 block text-sm text-gray-800">Constipation</label>
+                </div>
+            </fieldset>
+
+            <div>
+                <label for="other_conditions" class="block text-sm font-medium text-gray-700">Other Conditions</label>
+                <input type="text" id="other_conditions" name="other_conditions" maxlength="20" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </body>
 </html>

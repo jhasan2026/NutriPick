@@ -4,7 +4,7 @@ from .forms import CustomerForm
 import cohere
 from .forms import  CustomerForm
 from .models import  CustomerData
-import re
+from django.contrib import messages
 
 
 # Initialize Cohere client
@@ -19,15 +19,7 @@ def nutri_need_about(request):
     return HttpResponse("hello world from about")
 
 
-def customer_input(request):
-    if request.method == 'POST':
-        form = CustomerForm(request.POST)
-        if form.is_valid():
-            customer_data = form.save()
-            return render(request, 'nutri_needs/success.html', {'customer_data': customer_data})
-    else:
-        form = CustomerForm()
-    return render(request, 'nutri_needs/health_form.html', {'form': form})
+
 
 
 
@@ -109,10 +101,44 @@ def analyze_data(request):
 
 def customer_input(request):
     if request.method == 'POST':
-        form = CustomerForm(request.POST)
-        if form.is_valid():
-            customer_data = form.save()
-            return render(request, 'nutri_needs/success.html', {'customer_data': customer_data})
-    else:
-        form = CustomerForm()
-    return render(request, 'nutri_needs/health_form.html', {'form': form})
+        # Extract data from the form
+        try:
+            age = int(request.POST.get('age', 0))
+            height_foot = int(request.POST.get('height_foot', 0))
+            height_inch = int(request.POST.get('height_inch', 0))
+            weight = float(request.POST.get('weight', 0.0))
+            respiratory_problem = request.POST.get('respiratory_problem') == 'on'
+            diabetics = request.POST.get('diabetics') == 'on'
+            high_blood_pressure = request.POST.get('high_blood_pressure') == 'on'
+            heart_problem = request.POST.get('heart_problem') == 'on'
+            constipation = request.POST.get('constipation') == 'on'
+            other_conditions = request.POST.get('other_conditions', '')
+
+            # Validate required fields
+            if age <= 0 or height_foot <= 0 or weight <= 0.0:
+                messages.error(request, 'Please enter valid data for age, height, and weight.')
+                return render(request, 'nutri_needs/health_form.html')
+
+            # Save to database
+            customer = CustomerData.objects.create(
+                age=age,
+                height_foot=height_foot,
+                height_inch=height_inch,
+                weight=weight,
+                respiratory_problem=respiratory_problem,
+                diabetics=diabetics,
+                high_blood_pressure=high_blood_pressure,
+                heart_problem=heart_problem,
+                constipation=constipation,
+                other_conditions=other_conditions,
+            )
+            customer.save()
+            messages.success(request, "Your data has been successfully saved.")
+            return render(request, 'nutri_needs/success.html', {'customer': customer})
+
+        except ValueError:
+            messages.error(request, 'Invalid data submitted. Please check your input values.')
+            return render(request, 'nutri_needs/health_form.html')
+
+    # For GET requests, render the form
+    return render(request, 'nutri_needs/health_form.html')
