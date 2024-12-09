@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse 
 from .forms import UserInputForm
 from .models import UserInput
+from .forms import CustomerForm
 import cohere
+
+
 
 
 def nutri_need_home (request): 
@@ -42,3 +45,18 @@ def input_page(request):
 
 def show_response(request):
     return render(request, 'nutri_needs/response.html')
+
+
+
+
+
+
+def customer_input(request):
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            customer_data = form.save()
+            return render(request, 'nutri_needs/success.html', {'customer_data': customer_data})
+    else:
+        form = CustomerForm()
+    return render(request, 'nutri_needs/input_page.html', {'form': form})
