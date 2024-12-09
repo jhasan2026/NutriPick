@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Form</title>
-    <link rel="stylesheet" href="">
+    <title>Customer Input</title>
 </head>
 <body>
-<div class="container mt-5">
-    <h1>Customer Health Form</h1>
+    <h1>Enter Customer Data</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit">Submit</button>
     </form>
-</div>
 </body>
 </html>

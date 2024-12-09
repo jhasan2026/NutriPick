@@ -43,6 +43,9 @@ def input_page(request):
 
     return render(request, 'nutri_needs/input_page.html', {'form': form})
 
+
+
+
 def show_response(request):
     return render(request, 'nutri_needs/response.html')
 
@@ -59,4 +62,4 @@ def customer_input(request):
             return render(request, 'nutri_needs/success.html', {'customer_data': customer_data})
     else:
         form = CustomerForm()
-    return render(request, 'nutri_needs/input_page.html', {'form': form})
+    return render(request, 'nutri_needs/health_form.html', {'form': form})
