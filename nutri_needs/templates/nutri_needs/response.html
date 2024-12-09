@@ -5,7 +5,23 @@
 </head>
 <body>
     <h1>AI Response</h1>
+
+    <h2>Customer Data</h2>
+    <ul>
+        <li>Age: {{ customer_data.age }}</li>
+        <li>Height: {{ customer_data.height_foot }}' {{ customer_data.height_inch }}"</li>
+        <li>Weight: {{ customer_data.weight }} kg</li>
+        <li>Respiratory Problem: {{ customer_data.respiratory_problem }}</li>
+        <li>Diabetics: {{ customer_data.diabetics }}</li>
+        <li>High Blood Pressure: {{ customer_data.high_blood_pressure }}</li>
+        <li>Heart Problem: {{ customer_data.heart_problem }}</li>
+        <li>Constipation: {{ customer_data.constipation }}</li>
+        <li>Other Conditions: {{ customer_data.other_conditions }}</li>
+    </ul>
+
+    <h2>Analysis Result</h2>
     <p>{{ response }}</p>
+
     <a href="/">Back to Input</a>
 </body>
 </html>
