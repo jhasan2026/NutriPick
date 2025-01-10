@@ -9,7 +9,7 @@ git clone https://github.com/jhasan0122/Build_It . && rm -rf .git
 
 
 
-#### - Create Virtual Environment
+#### - Create Virtual Environment 
 
 ###### # Windows
 ```
@@ -23,7 +23,19 @@ venv\Scripts\activate
 
 <br>
 
+#### - Create Virtual Environment  in anaconda
 
+###### # Windows
+```
+conda create --name sklearn_env python=3.10
+
+```
+conda env list
+
+```
+conda activate sklearn_env
+```
+conda deactivate
 
 
 #### - Create new project
