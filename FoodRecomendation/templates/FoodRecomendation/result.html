@@ -1,0 +1,51 @@
+{% extends 'user/Base.html' %}
+
+{% block content %}
+    <!-- Container -->
+    <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+
+        <!-- Heading -->
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-6">Meal Suggestions</h1>
+
+        {% if food_suggestions %}
+            <!-- Debugging: Print the raw food_suggestions structure -->
+            {% comment %} <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Food Suggestions (Debugging)</h3>
+                <pre class="bg-gray-100 p-4 rounded-lg">{{ food_suggestions | safe }}</pre>
+            </div> {% endcomment %}
+
+            <!-- Meal Plan Section -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Meal Plan Suggestions</h2>
+                
+                <div class="space-y-6">
+                    {% for day, meals in food_suggestions.meal_plan.items %}
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-bold text-blue-500 mb-2">{{ day }}</h3>
+                            <div class="space-y-4">
+                                {% for meal, suggestion in meals.items %}
+                                    <div class="flex justify-between">
+                                        <span class="font-medium text-gray-700">{{ meal }}:</span>
+                                        <span class="text-gray-600">{{ suggestion }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+          <!-- Original Text (For Debugging) -->
+            {% comment %} <div class="mt-8">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Original Text (API Response)</h3>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                    <pre class="text-sm text-gray-700 whitespace-pre-wrap">{{ food_suggestions.original_text }}</pre>
+                </div>
+            </div> {% endcomment %}
+
+        {% else %}
+            <p class="text-center text-gray-600">No food suggestions available.</p>
+        {% endif %}
+        
+    </div>
+{% endblock %}

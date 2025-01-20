@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     "nutri_needs.apps.NutriNeedsConfig",
+    'FoodRecomendation',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,18 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     # Add any other backends here
 ]
+
+# settings.py
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the Cohere API key from environment variables
+COHERE_API_KEY = os.getenv('COHERE_API_KEY')
+
+# Ensure the key is available
+if not COHERE_API_KEY:
+    raise ValueError("Cohere API key not found. Please set COHERE_API_KEY in your .env file.")
