@@ -1,0 +1,20 @@
+{% extends 'user/BASE.html' %}
+
+{% block content %}
+<section class="text-gray-600 body-font min-vh-100">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="flex justify-center items-center">
+            <h3 class="text-xl font-semibold">Are you sure you have completed this task?</h3>
+        </div>
+        <div class="flex justify-center items-center pt-4">
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">
+                    Yes, Completed
+                </button>
+                <a href="{% url 'workout_plan' %}" class="ml-4 text-gray-500">Cancel</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

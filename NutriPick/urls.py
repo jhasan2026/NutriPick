@@ -23,10 +23,12 @@ from user.views import home
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("",home,name='home'),
+    path('', include('posts.urls')),
     path("user/",include('user.urls')),
-    path("nutri_need_home/",include('nutri_needs.urls')),
-    path('FoodRecomendation/', include('FoodRecomendation.urls')),
+    path("workout_plan/",include('workout.urls')),
+    path('chat/', include('a_rtchat.urls')),
+    path('dietitian/',include('Dietitian.urls')),
+
 ]
 
 if settings.DEBUG:

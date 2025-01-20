@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime
+from django.conf import settings
 # Create your models here.
 
 class Patient(models.Model):
@@ -30,4 +31,18 @@ class Patient(models.Model):
     def create_or_update_patient_profile(sender, instance, created, **kwargs):
         if created:
             Patient.objects.create(user=instance)
+
+
+    @property
+    def name(self):
+        if self.displayname:
+            return self.displayname
+        return self.user.username
+
+    @property
+    def avatar(self):
+        if self.image:
+            return self.image.url
+        return f'{settings.STATIC_URL}images/avatar.svg'
+
 

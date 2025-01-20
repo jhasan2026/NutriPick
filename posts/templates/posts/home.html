@@ -1,0 +1,65 @@
+{% extends 'user/BASE.html' %}
+{% block content %}
+
+
+
+<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
+    <a href="{% url 'create_post' %}" type="button" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-s px-5 py-2.5 text-center me-2 mb-2 sticky">Create Post</a>
+    {% for post in posts %}
+
+    <div class="flex justify-between px-4 py-8 mx-auto max-w-screen-xl">
+        <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+
+                <header class="mb-4 lg:mb-6 not-format">
+                    <address class="flex items-center mb-6 not-italic">
+                        <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                            <img class="mr-4 w-16 h-16 rounded-full"
+                                 src="{{ post.author.patient.image.url }}" alt="Jese Leos">
+                            <div>
+                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{ post.author.username }}</a>
+                                <p class="text-base text-gray-500 dark:text-gray-400">{{ post.author.bio }}</p>
+                                <p class="text-base text-gray-500 dark:text-gray-400">
+                                    <time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ post.updated_at }}
+                                    </time>
+                                </p>
+                            </div>
+                        </div>
+                    </address>
+                    <a href="{% url 'post_detail' post.id %}">
+                        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ post.title }}</h1>
+                    </a>
+                </header>
+
+            <a href="{% url 'post_detail' post.id %}">
+                <p class="lead pb-4">{{ post.content }}</p>
+            </a>
+
+
+            {% if post.image %}
+            <figure><img src="{{ post.image.url }}" alt="">
+                <!--                <figcaption>Digital art by Anonymous</figcaption>-->
+            </figure>
+            {% endif %}
+        </article>
+
+
+        <a href="{% url 'like_post' post.id %}" class="flex items-end px-6">
+            <div class="cursor-pointer">
+                <span class="flex h-min w-min space-x-1 items-center rounded-full text-gray-400 hover:text-rose-600 bg-gray-700 hover:bg-rose-50 py-1 px-2 text-xs font-medium">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none"
+                       viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                  </svg>
+                  <p class="font-semibold text-xs">{{ post.likes.count }}</p>
+                </span>
+            </div>
+        </a>
+    </div>
+
+    {% endfor %}
+</main>
+
+
+
+{% endblock %}

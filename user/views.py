@@ -68,6 +68,7 @@ class CustomLoginView(LoginView):
         return reverse_lazy('home')
 
 
+
 def profile_update_view(request):
     # Get the user's profile instance
     patient = get_object_or_404(Patient, user=request.user)
@@ -138,16 +139,8 @@ def profile_update_view(request):
     })
 
 
-
-
-
-
-
-
-
 from django.shortcuts import render, redirect
 from .models import Patient
-
 
 def set_default_image_view(request, patient_id):
     # Get the patient's instance

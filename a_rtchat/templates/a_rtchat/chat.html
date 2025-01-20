@@ -1,0 +1,116 @@
+{% extends 'user/BASE.html' %}
+
+{% block content %}
+
+<div class="flex justify-content-evenly">
+<!-- sidebar -->
+<span class="hidden md:flex flex-col w-64 bg-gray-800">
+    <div class="flex items-center justify-center h-16 bg-gray-900">
+        <span class="text-white font-bold uppercase">Chat</span>
+    </div>
+    <div class="flex flex-col flex-1 overflow-y-auto">
+        <nav class="flex-1 px-2 py-4 bg-gray-800">
+            <a href="{% url 'chat'  %}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Public Chat
+            </a>
+            {% for thisUser in usersList %}
+            {% if user != thisUser %}
+            <a href="{% url 'start-chat' thisUser.username %}" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+<!--                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"-->
+<!--                     stroke="currentColor">-->
+<!--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
+<!--                          d="M13 10V3L4 14h7v7l9-11h-7z" />-->
+<!--                </svg>-->
+                <img class="h-6 w-6 rounded-full mr-5 " src="{{ thisUser.patient.image.url }}" alt="">
+                {{ thisUser.username }}
+            </a>
+            {% endif %}
+            {% endfor %}
+        </nav>
+    </div>
+</span>
+
+
+
+
+<span class="block min-w-10 max-w-2xl mx-auto my-10 px-6">
+    <div id="chat_window" class="h-[45rem] w-[34rem] flex flex-col bg-gray-800 rounded-2xl shadow-2xl relative p-1">
+        <div class="flex justify-center text-emerald-400 bg-gray-800 p-2 sticky top-0 z-10">
+            {% if other_user %}
+
+                <div id="online-icon" class="gray-dot absolute top-2 left-2"></div>
+                <a href="#">
+                    <div class="flex items-center gap-2 p-4 sticky top-0 z-10">
+                        <img class="w-10 h-10 rounded-full object-cover" src="{{ other_user.patient.avatar }}" />
+                        <div>
+                            <span class="font-bold text-white">{{ other_user.patient.username }}</span>
+                            <span class="text-sm font-light text-gray-400">@{{ other_user.username }}</span>
+                        </div>
+                    </div>
+                </a>
+            {% else %}
+                <div class="online-icon"></div>
+                <span id="online-count" class="pr-1"></span>online
+            {% endif %}
+        </div>
+        <div id='chat_container' class="overflow-y-auto grow">
+            <ul id='chat_messages' class="flex flex-col justify-end gap-2 p-4">
+                {% for message in chat_messages reversed %}
+                    {% include 'a_rtchat/chat_message.html' %}
+                {% endfor %}
+
+            </ul>
+        </div>
+        <div class="sticky bottom-0 z-10 p-2 bg-gray-800">
+            <div class="flex items-center rounded-xl px-2 py-2">
+                <form id="chat_message_form" class="w-full"
+                    hx-post="{% url 'chat' %}"
+                      hx-target="#chat_messages"
+                       hx-swap="beforeend"
+                        hx-ext="ws"
+                        ws-connect="/ws/chatroom/{{ chatroom_name }}"
+                        ws-send
+                      _="on htmx:wsAfterSend reset() me"  >
+                    {% csrf_token %}
+                    {{ form }}
+                </form>
+            </div>
+        </div>
+    </div>
+</span>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+    function scrollToBottom(time=0) {
+        setTimeout(function() {
+            const container = document.getElementById('chat_container');
+            container.scrollTop = container.scrollHeight;
+        }, time);
+    }
+    scrollToBottom()
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputField = document.getElementById('chat_message_form');
+        const form = document.getElementById('chat_message_form');
+
+        // Submit form when Enter is pressed
+        inputField.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && inputField.value.trim() !== '') {
+                event.preventDefault(); // Prevent default behavior
+                form.submit(); // Submit the form
+            }
+        });
+    });
+
+</script>
+{% endblock %}

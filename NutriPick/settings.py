@@ -26,13 +26,17 @@ SECRET_KEY = "django-insecure-fc6x+_#$u+#ru$3tr=5c(bf)pc&03x1_!^#dg7$rlv0a%2^j%2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
+
+CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     "user.apps.UserConfig",
+    "posts.apps.PostsConfig",
+    "workout.apps.WorkoutConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,9 +45,15 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'crispy_forms',
     'crispy_bootstrap4',
-    "nutri_needs.apps.NutriNeedsConfig",
-    'FoodRecomendation',
+    'allauth',
+    'allauth.account',
+    'django_htmx',
+    'a_rtchat',
+    'django.contrib.sites',
+    'Dietitian',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -53,6 +63,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
+    'django_htmx.middleware.HtmxMiddleware',
 ]
 
 ROOT_URLCONF = "NutriPick.urls"
@@ -60,7 +72,7 @@ ROOT_URLCONF = "NutriPick.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [ BASE_DIR / 'templates' ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -73,8 +85,15 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "NutriPick.wsgi.application"
+# WSGI_APPLICATION = "NutriPick.wsgi.application"
 
+ASGI_APPLICATION = 'NutriPick.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -142,18 +161,3 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     # Add any other backends here
 ]
-
-# settings.py
-import os
-from pathlib import Path
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Get the Cohere API key from environment variables
-COHERE_API_KEY = os.getenv('COHERE_API_KEY')
-
-# Ensure the key is available
-if not COHERE_API_KEY:
-    raise ValueError("Cohere API key not found. Please set COHERE_API_KEY in your .env file.")

@@ -1,0 +1,81 @@
+{% extends 'user/BASE.html' %}
+{% block content %}
+
+<!--<h1>Create a Post</h1>-->
+<!--<form method="post" enctype="multipart/form-data">-->
+<!--    {% csrf_token %}-->
+
+<!--    &lt;!&ndash; Title Field &ndash;&gt;-->
+<!--    <div>-->
+<!--        <label for="id_title">Title</label>-->
+<!--        <input type="text" id="id_title" name="title" value="{{ form.title.value|default_if_none:'' }}">-->
+<!--        {% if form.title.errors %}-->
+<!--        <div class="error">-->
+<!--            {{ form.title.errors }}-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Content Field &ndash;&gt;-->
+<!--    <div>-->
+<!--        <label for="id_content">Content</label>-->
+<!--        <textarea id="id_content" name="content">{{ form.content.value|default_if_none:'' }}</textarea>-->
+<!--        {% if form.content.errors %}-->
+<!--        <div class="error">-->
+<!--            {{ form.content.errors }}-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Image Field &ndash;&gt;-->
+<!--    <div>-->
+<!--        <label for="id_image">Upload an Image</label>-->
+<!--        <input type="file" id="id_image" name="image">-->
+<!--        {% if form.image.errors %}-->
+<!--        <div class="error">-->
+<!--            {{ form.image.errors }}-->
+<!--        </div>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; Submit Button &ndash;&gt;-->
+<!--    <button type="submit">Create Post</button>-->
+<!--</form>-->
+
+
+<section class="text-gray-600 body-font">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="container py-24 mx-auto">
+            <div class="flex w-full sm:flex-row flex-col mx-auto px-4 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div class="relative flex-grow w-full">
+                    <label for="id_title" class="leading-7 text-sm text-gray-600">TItle</label>
+                    <input  type="text" id="id_title" name="title" value="{{ form.title.value|default_if_none:'' }}"
+                           class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                </div>
+            </div>
+            <div class="flex w-full sm:flex-row flex-col mx-auto px-4 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div class="relative flex-grow w-full">
+                    <label for="id_content" class="leading-7 text-sm text-gray-600">Content</label>
+                    <textarea id="id_content" name="content" rows="8"
+                           class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ form.content.value|default_if_none:'' }}</textarea>
+                </div>
+            </div>
+
+            <div class="flex w-full sm:flex-row flex-col mx-auto px-4 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="id_image">Upload Image</label>
+                <input type="file" id="id_image" name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+            </div>
+
+            <div class="flex justify-center pt-4">
+                <button type="submit" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                Post
+                </button>
+            </div>
+        </div>
+    </form>
+</section>
+
+
+{% endblock %}
