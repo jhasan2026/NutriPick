@@ -37,6 +37,7 @@ conda activate sklearn_env
 ```
 conda deactivate
 
+python manage.py runserver
 
 #### - Create new project
 ```
@@ -72,7 +73,7 @@ python manage.py createsuperuser
 
 #### - Run application
 ```angular2html
-python manage.py runserver
+
 ```
 
 <br>
