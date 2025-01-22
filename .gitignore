@@ -1,6 +1,17 @@
 nutri_needs/__pycache__/
 NutriPick/__pycache__/
 user/__pycache__/
+a_rtchat/__pycache__/
+a_rtchat/migrations/__pycache__/
+Dietitian/__pycache__/
+Dietitian/migrations/__pycache__/
+FoodRecomendation/__pycache__/
+FoodRecomendation/migrations/__pycache__/
+posts/__pycache__/
+posts/migrations/__pycache__/
+user/migrations/__pycache__/
+workout/__pycache__/
+workout/migrations/__pycache__
 db.sqlite3
 .env
 
