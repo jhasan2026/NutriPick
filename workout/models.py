@@ -21,17 +21,18 @@ class workoutRoutine(models.Model):
     thu_time_end = models.TimeField(default=time(12, 0),null=True)
     fri_time_end = models.TimeField(default=time(12, 0),null=True)
 
-    sat_work = models.CharField(max_length=10,default='')
-    sun_work = models.CharField(max_length=10,default='')
-    mon_work = models.CharField(max_length=10,default='')
-    tue_work = models.CharField(max_length=10,default='')
-    wed_work = models.CharField(max_length=10,default='')
-    thu_work = models.CharField(max_length=10,default='')
-    fri_work = models.CharField(max_length=10,default='')
+    sat_work = models.CharField(max_length=10,default='No')
+    sun_work = models.CharField(max_length=10,default='No')
+    mon_work = models.CharField(max_length=10,default='No')
+    tue_work = models.CharField(max_length=10,default='No')
+    wed_work = models.CharField(max_length=10,default='No')
+    thu_work = models.CharField(max_length=10,default='No')
+    fri_work = models.CharField(max_length=10,default='No')
 
     updated_at = models.DateTimeField(auto_now=True)
-
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+
 
     def __str__(self):
         return f'{self.user.username} Plan'
