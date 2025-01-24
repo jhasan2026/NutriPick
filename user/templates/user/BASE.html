@@ -6,9 +6,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-    </style>
+
 <!--    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>-->
 <!--    <script src="https://unpkg.com/htmx.org@2.0.2"></script>-->
 <!--    <script src="https://unpkg.com/htmx.org/dist/ext/ws.js"></script>-->
@@ -84,12 +82,12 @@
         .allauth .helptext {
             @apply block mt-4
         }
-        input[type=file] {
-            @apply bg-white pl-0
-        }
-        .textarea, textarea, input {
-            @apply w-full rounded-lg py-4 px-5 bg-gray-100
-        }
+        /*input[type=file] {*/
+        /*    @apply bg-white pl-0*/
+        /*}*/
+        /*.textarea, textarea, input {*/
+        /*    @apply w-full rounded-lg py-4 px-5 bg-gray-100*/
+        /*}*/
         .errorlist li {
             @apply p-1 pl-4 border-l-red-500 border-l-4 border-solid mb-2 text-red-500
         }
@@ -123,7 +121,7 @@
 </header>
 
 
-<main role="main" class="w-full">
+<main role="main" class="w-full  min-vh-200 bg-[url('{% static 'image/Designer4.png' %}')] bg-repeat bg-center">
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">

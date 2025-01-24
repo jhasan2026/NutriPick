@@ -7,3 +7,7 @@
     color: #76a537; /* Optional: Change color on hover */
     text-decoration: underline; /* Optional: Add underline on hover */
 }
+
+.color-set{
+    color: rgba(255, 255, 255, 0.89);
+}
