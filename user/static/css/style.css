@@ -1,0 +1,9 @@
+.green_text {
+    color: #90c743;
+    text-decoration: none; /* Optional: Removes the underline */
+}
+
+.green_text:hover {
+    color: #76a537; /* Optional: Change color on hover */
+    text-decoration: underline; /* Optional: Add underline on hover */
+}
