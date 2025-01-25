@@ -11,7 +11,7 @@
 
 </style>
 
-
+{% load static %}
 
 
 
@@ -22,38 +22,38 @@
     <div class="w-full text-7xl font-bold">
       <h1 class="w-full md:w-2/3">How can we help you. Get in touch</h1>
     </div>
-    <div class="flex mt-8 flex-col md:flex-row md:justify-between">
+    <div class="flex mt-14 flex-col md:flex-row md:justify-between ">
       <p class="w-full md:w-2/3 text-gray-400">
         To ensure that we provide the best service to our customers & help them
         reach their goal.
       </p>
 
     </div>
-    <div class="flex flex-col">
+    <div class="flex flex-col min-h-1/3">
       <div class="flex mt-24 mb-12 flex-row justify-between">
         <div class="">
 
-          <a class="hidden md:block cursor-pointer text-xl font-bold font-serif gradient-text">
-            NutriPick
-          </a>
+          <a href="{% url 'home' %}" class="flex items-center">
+            <img src="{% static 'image/logo2.png' %}" class="mr-3 h-24 sm:h-24 mb-20" alt=""/>
+        </a>
         </div>
         <a
-          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase"
+          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase mt-10"
           >About</a
         >
         <a
-          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase"
+          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase mt-10"
           >Services</a
         >
         <a
-          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase"
+          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase mt-10"
           >Why us</a
         >
         <a
-          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase"
+          class="hidden md:block cursor-pointer text-gray-600 hover:text-white uppercase mt-10"
           >Contact</a
         >
-        <div class="flex flex-row space-x-8 items-center justify-between">
+        <div class="flex flex-row space-x-8 items-center justify-between mb-16">
           <a>
             <svg
               width="6"
