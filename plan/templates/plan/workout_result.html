@@ -1,0 +1,11 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
+    <h1 class="text-2xl font-bold mb-4">Your 7-Day Workout Plan</h1>
+    <pre class="bg-gray-200 p-4 rounded">{{ workout_plan }}</pre>
+    <a href="{% url 'plan:workout_plan' %}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+        Generate Another Plan
+    </a>
+</div>
+{% endblock %}

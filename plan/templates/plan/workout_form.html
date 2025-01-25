@@ -1,0 +1,53 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
+    <h1 class="text-2xl font-bold mb-4">Generate Your 7-Day Workout Plan</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label class="block font-medium">Height (in cm):</label>
+            <input type="number" name="height" required class="w-full border p-2 rounded">
+        </div>
+        <div class="mb-4">
+            <label class="block font-medium">Weight (in kg):</label>
+            <input type="number" name="weight" required class="w-full border p-2 rounded">
+        </div>
+        <div class="mb-4">
+            <label class="block font-medium">Daily Calorie Need:</label>
+            <input type="number" name="calories" required class="w-full border p-2 rounded">
+        </div>
+        <div class="mb-4">
+            <label class="block font-medium">Purpose:</label>
+            <select name="purpose" required class="w-full border p-2 rounded">
+                <option value="bodybuilding">Bodybuilding</option>
+                <option value="weight_loss">Weight Loss</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="endurance">Endurance</option>
+                <option value="flexibility">Flexibility</option>
+                <option value="stress_reduction">Stress Reduction</option>
+                <option value="muscle_toning">Muscle Toning</option>
+                <option value="general_fitness">General Fitness</option>
+                <option value="rehabilitation">Rehabilitation</option>
+                <option value="sport_performance">Sport Performance</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="block font-medium">Preferred Type of Exercise:</label>
+            <select name="exercise_type" required class="w-full border p-2 rounded">
+                <option value="strength">Strength</option>
+                <option value="cardio">Cardio</option>
+                <option value="yoga">Yoga</option>
+                <option value="high_intensity">High Intensity</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="block font-medium">Desired State:</label>
+            <input type="text" name="state" required class="w-full border p-2 rounded">
+        </div>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+            Generate Plan
+        </button>
+    </form>
+</div>
+{% endblock %}

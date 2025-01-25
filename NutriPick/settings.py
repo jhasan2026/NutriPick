@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'Dietitian',
     "nutri_needs.apps.NutriNeedsConfig",
     'FoodRecomendation',
+    'plan',
 ]
 
 SITE_ID = 1

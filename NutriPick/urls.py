@@ -30,6 +30,7 @@ urlpatterns = [
     path("nutri_need_home/",include('nutri_needs.urls')),
     path('FoodRecomendation/', include('FoodRecomendation.urls')),
     path('dietitian/',include('Dietitian.urls')),
+    path('plan/', include('plan.urls')),
 
 ]
 
