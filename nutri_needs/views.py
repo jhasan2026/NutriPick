@@ -7,6 +7,24 @@ from .models import  CustomerData
 from django.contrib import messages
 
 
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+from django.shortcuts import get_object_or_404
+
+
+
+
+
+
+
+
+
+
+
+
 # Initialize Cohere client
 cohere_client = cohere.Client('qcytX68hUTdhqabTQwkdlY5IVbQhOAWHDRi0k3Nv')
 
@@ -89,14 +107,28 @@ def analyze_data(request):
     output = response.generations[0].text.strip()
 
     # Split response into list items
-    list_items = output.split('\n')  # Split by newlines if the API format uses them
-    list_items = [item.strip() for item in list_items if item.strip()]  # Remove empty or extra spaces
+    list_items = output.split('\n')  
+    list_items = [item.strip() for item in list_items if item.strip()]  
+
+    # Store analysis results in the session
+    request.session['analysis_results'] = list_items
+    request.session['customer_data'] = {
+        'age': customer_data.age,
+        'height_foot': customer_data.height_foot,
+        'height_inch': customer_data.height_inch,
+        'weight': customer_data.weight,
+        'respiratory_problem': customer_data.respiratory_problem,
+        'diabetics': customer_data.diabetics,
+        'high_blood_pressure': customer_data.high_blood_pressure,
+        'heart_problem': customer_data.heart_problem,
+        'constipation': customer_data.constipation,
+        'other_conditions': customer_data.other_conditions,
+    }
 
     return render(request, 'nutri_needs/response.html', {
         'response_list': list_items,
         'customer_data': customer_data
     })
-
 
 
 def customer_input(request):
@@ -142,3 +174,55 @@ def customer_input(request):
 
     # For GET requests, render the form
     return render(request, 'nutri_needs/health_form.html')
+
+
+
+def report_pdf(request):
+    # Create a Byte stream buffer
+    buf = io.BytesIO()
+
+    # Create a canvas
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+
+    # Create a text object
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Times-Roman", 12)
+
+    # Fetch analysis results and customer data from the session
+    list_items = request.session.get('analysis_results', [])
+    customer_data = request.session.get('customer_data', None)
+
+    if not customer_data:
+        c.drawString(inch, inch, "No customer data available.")
+        c.showPage()
+        c.save()
+        buf.seek(0)
+        return FileResponse(buf, as_attachment=True, filename='report.pdf')
+
+    # Customer data section
+    textob.textLine("Customer Data:")
+    textob.textLine(f"Age: {customer_data['age']}")
+    textob.textLine(f"Height: {customer_data['height_foot']} feet {customer_data['height_inch']} inches")
+    textob.textLine(f"Weight: {customer_data['weight']} kg")
+    textob.textLine(f"Respiratory Problem: {'Yes' if customer_data['respiratory_problem'] else 'No'}")
+    textob.textLine(f"Diabetes: {'Yes' if customer_data['diabetics'] else 'No'}")
+    textob.textLine(f"High Blood Pressure: {'Yes' if customer_data['high_blood_pressure'] else 'No'}")
+    textob.textLine(f"Heart Problem: {'Yes' if customer_data['heart_problem'] else 'No'}")
+    textob.textLine(f"Constipation: {'Yes' if customer_data['constipation'] else 'No'}")
+    textob.textLine(f"Other Conditions: {customer_data['other_conditions']}")
+    textob.textLine("")
+
+    # Analysis Results section
+    textob.textLine("Analysis Results:")
+    for item in list_items:
+        textob.textLine(item)
+
+    # Finish the PDF
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    # Return the PDF file as a response
+    return FileResponse(buf, as_attachment=True, filename='report.pdf')
