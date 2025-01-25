@@ -1,41 +1,162 @@
-{% extends 'user/BASE.html' %}
-
-{% block content %}
-
-<div class="flex items-center justify-center min-h-screen bg-gray-50">
-
-
-    <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-lg">
-
-
-        <div class="border-b pb-4 mb-4">
-            <h1 class="text-2xl font-semibold text-gray-700 text-center">Data Submitted Successfully!</h1>
-        </div>
-
-
-        <div class="space-y-2">
-            <ul class="text-gray-600">
-                <li class="py-1"><span class="font-semibold">Age:</span> {{ customer.age }}</li>
-                <li class="py-1"><span class="font-semibold">Height:</span> {{ customer.height_foot }}' {{ customer.height_inch }}"</li>
-                <li class="py-1"><span class="font-semibold">Weight:</span> {{ customer.weight }} kg</li>
-                <li class="py-1"><span class="font-semibold">Respiratory Problem:</span> {{ customer.respiratory_problem }}</li>
-                <li class="py-1"><span class="font-semibold">Diabetics:</span> {{ customer.diabetics }}</li>
-                <li class="py-1"><span class="font-semibold">High Blood Pressure:</span> {{ customer.high_blood_pressure }}</li>
-                <li class="py-1"><span class="font-semibold">Heart Problem:</span> {{ customer.heart_problem }}</li>
-                <li class="py-1"><span class="font-semibold">Constipation:</span> {{ customer.constipation }}</li>
-                <li class="py-1"><span class="font-semibold">Other Conditions:</span> {{ customer.other_conditions }}</li>
-            </ul>
-        </div>
-
-
-        <div class="mt-6 text-center">
-            <a href="analyze/" class="inline-block bg-[#4E6E5D] hover:bg-[#4E6E5D99]
-             text-white px-4 py-2 rounded-lg shadow  transition duration-200">
-                Analyze Data
-            </a>
-        </div>
-
+{% extends 'user/BASE.html' %} {% block content %}
+<div class="flex items-center justify-center min-h-screen">
+    <div
+    class="bg-white/30 shadow-md rounded-xl p-6 w-full max-w-5xl hover:shadow-lg transition-shadow backdrop-blur-lg border border-white/20"
+  >
+    <div class="border-b pb-4 mb-6">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 text-center">
+        Data Submitted Successfully
+        <i class="fa-regular fa-bookmark"></i>
+      </h1>
+      
     </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Age -->
+      <div
+      class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+    >
+      <div class="rounded-full bg-blue-50 p-3">
+        <i class="fa-solid fa-user text-lime-400 text-xl"></i>
+      </div>
+      <div>
+        <h3 class="text-gray-600 text-sm font-bold">Age</h3>
+        <p class="text-gray-900 text-lg font-semibold mt-1">
+          {{ customer.age }}
+        </p>
+      </div>
+    </div>
+
+      <!-- Height -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-ruler-vertical text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Height</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.height_foot }}' {{ customer.height_inch }}"
+          </p>
+        </div>
+      </div>
+
+      <!-- Weight -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-weight-scale text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Weight</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.weight }} kg
+          </p>
+        </div>
+      </div>
+
+      <!-- Respiratory Problem -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-lungs text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Respiratory Problem</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.respiratory_problem }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Diabetics -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-droplet text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Diabetics</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.diabetics }}
+          </p>
+        </div>
+      </div>
+
+      <!-- High Blood Pressure -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-stethoscope text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">High Blood Pressure</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.high_blood_pressure }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Heart Problem -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-heart-pulse text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Heart Problem</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.heart_problem }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Constipation -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-toilet text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Constipation</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.constipation }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Other Conditions -->
+      <div
+        class="bg-white rounded-xl shadow-md p-6 flex items-start space-x-4 hover:shadow-[0_4px_10px_rgba(34,197,94,0.5)] transition-shadow"
+      >
+        <div class="rounded-full bg-blue-50 p-3">
+          <i class="fa-solid fa-list text-lime-400 text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-gray-600 text-sm font-bold">Other Conditions</h3>
+          <p class="text-gray-900 text-lg font-normal mt-1">
+            {{ customer.other_conditions }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 text-center">
+        <a
+        href="analyze/"
+        class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-lg font-semibold"
+      >
+        Analyze Data
+      </a>
+      
+    </div>
+  </div>
 </div>
 {% endblock %}

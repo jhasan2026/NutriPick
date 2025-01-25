@@ -133,7 +133,7 @@ def customer_input(request):
                 other_conditions=other_conditions,
             )
             customer.save()
-            messages.success(request, "Your data has been successfully saved.")
+
             return render(request, 'nutri_needs/success.html', {'customer': customer})
 
         except ValueError:
