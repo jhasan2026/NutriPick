@@ -1,77 +1,77 @@
 {% extends 'user/BASE.html' %}
 {% block content %}
-
-
-<div class="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-    <aside class="hidden py-4 md:w-1/5 lg:w-1/5 md:block">
-        <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
-
-            <a href="{% url 'create_post' %}" type="button" class="text-white bg-gradient-to-br from-slate-800 to-slate-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-s px-5 py-2.5 text-center me-2 mb-2 sticky">Create Post</a>
-
+<div class="bg-green-50 w-full flex flex-col md:flex-row gap-6 px-4 md:px-10 lg:px-16 py-6 justify-center">
+    <!-- Sidebar -->
+    {% comment %} <aside class="hidden md:block md:w-1/4 lg:w-1/5 bg-white shadow rounded-lg p-6 sticky top-16">
+        <div class="flex flex-col gap-4">
+            <a href="{% url 'create_post' %}" class="block text-center text-white bg-gradient-to-r from-green-500 to-yellow-500 hover:bg-gradient-to-l focus:ring-4 focus:ring-green-300 font-medium rounded-lg px-4 py-2.5 transition-all">Create Post</a>
+            <nav class="flex flex-col gap-3">
+                <a href="#" class="text-gray-700 hover:text-green-500">Home</a>
+                <a href="#" class="text-gray-700 hover:text-green-500">Trending</a>
+                <a href="#" class="text-gray-700 hover:text-green-500">Following</a>
+            </nav>
         </div>
-    </aside>
+    </aside> {% endcomment %}
 
-
-    <main class="w-full min-h-screen py-1 md:w-4/5 lg:w-4/5">
-
-
-    {% for post in posts %}
-
-    <div class="flex justify-between px-4 py-8 mx-auto max-w-screen-xl">
-        <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-
-                <header class="mb-4 lg:mb-6 not-format">
-                    <address class="flex items-center mb-6 not-italic">
-                        <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                            <img class="mr-4 w-16 h-16 rounded-full"
-                                 src="{{ post.author.patient.image.url }}" alt="Jese Leos">
-                            <div>
-                                <a href="#" rel="author" class="text-xl font-bold text-gray-900 dark:text-white">{{ post.author.username }}</a>
-                                <p class="text-base text-gray-500 dark:text-gray-400">{{ post.author.bio }}</p>
-                                <p class="text-base text-gray-500 dark:text-gray-400">
-                                    <time pubdate datetime="2022-02-08" title="February 8th, 2022">{{ post.updated_at }}
-                                    </time>
-                                </p>
-                            </div>
-                        </div>
-                    </address>
-                    <a href="{% url 'post_detail' post.id %}">
-                        <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ post.title }}</h1>
-                    </a>
-                </header>
-
-            <a href="{% url 'post_detail' post.id %}">
-                <p class="lead pb-4">{{ post.content }}</p>
-            </a>
-
-
-            {% if post.image %}
-            <figure><img src="{{ post.image.url }}" alt="">
-                <!--                <figcaption>Digital art by Anonymous</figcaption>-->
-            </figure>
-            {% endif %}
-        </article>
-
-
-        <a href="{% url 'like_post' post.id %}" class="flex items-end px-6">
-            <div class="cursor-pointer">
-                <span class="flex h-min w-min space-x-1 items-center rounded-full text-gray-400 hover:text-rose-600 bg-gray-700 hover:bg-rose-50 py-1 px-2 text-xs font-medium">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 fill-current hover:text-red-400" fill="none"
-                       viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                  </svg>
-                  <p class="font-semibold text-xs">{{ post.likes.count }}</p>
-                </span>
+    <!-- Main Content -->
+    <main class="w-full md:w-3/5 lg:w-3/5">
+        {% for post in posts %}
+        <div class="bg-white shadow rounded-lg mb-4 overflow-hidden">
+            <!-- Post Header -->
+            <div class="flex items-center p-3 border-b">
+                <img class="w-10 h-10 rounded-full" src="{{ post.author.patient.image.url }}" alt="Profile Picture">
+                <div class="ml-3">
+                    <h3 class="text-sm font-bold text-gray-800">{{ post.author.username }}</h3>
+                    <p class="text-xs text-gray-500">{{ post.author.bio }}</p>
+                    <time class="text-xs text-gray-400" datetime="{{ post.updated_at }}">{{ post.updated_at }}</time>
+                </div>
             </div>
-        </a>
-    </div>
 
-    {% endfor %}
-</main>
+            <!-- Post Content -->
+            <div class="p-3">
+                <a href="{% url 'post_detail' post.id %}">
+                    <h2 class="text-base font-bold text-gray-800 hover:text-green-500">{{ post.title }}</h2>
+                </a>
+                <p class="text-sm text-gray-700 mt-1">{{ post.content }}</p>
 
+                {% if post.image %}
+                <div class="mt-3">
+                    <img class="w-full rounded-lg" src="{{ post.image.url }}" alt="Post Image">
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Post Actions -->
+            <div class="flex items-center justify-between px-3 py-2 bg-green-50 border-t">
+                <a href="{% url 'like_post' post.id %}" class="flex items-center space-x-2 text-gray-500 hover:text-red-500">
+                    <i class="fa-solid fa-heart-circle-plus h-6 w-6 text-xl"></i>
+                    <span class="text-base">{{ post.likes.count }}</span>
+                </a>
+
+                <a href="{% url 'post_detail' post.id %}" class="text-xl font-medium text-gray-500 hover:text-green-500">Read More</a>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
 </div>
 
+<!-- Floating Button -->
+<a href="{% url 'create_post' %}" id="floating-button" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg focus:ring-4 focus:ring-green-300 transition-all">
+    <i class="fa-solid fa-square-plus text-2xl"></i> Create Post
+</a>
 
 
+<script>
+    document.addEventListener('scroll', () => {
+        const floatingButton = document.getElementById('floating-button');
+        const contentEnd = document.querySelector('main');
+        const contentEndPosition = contentEnd.getBoundingClientRect().bottom;
+
+        if (contentEndPosition < window.innerHeight) {
+            floatingButton.style.display = 'none';
+        } else {
+            floatingButton.style.display = 'block';
+        }
+    });
+</script>
 {% endblock %}
