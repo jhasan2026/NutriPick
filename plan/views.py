@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Initialize Cohere Client
 cohere_client = cohere.Client('YxmJyjufEbDJftLydW2sowne4pNRHqX54aPfk4kk')
 
-def workout_plan(request):
+def plan_home(request):
     if request.method == 'POST':
         # Get user inputs
         height = request.POST.get('height')
@@ -36,7 +36,7 @@ def workout_plan(request):
             temperature=0.7
         )
 
-        workout_plan = response.generations[0].text.strip()
-        return render(request, 'plan/workout_result.html', {'workout_plan': workout_plan})
+        plan_home = response.generations[0].text.strip()
+        return render(request, 'plan/workout_result.html', {'plan_home': plan_home})
 
     return render(request, 'plan/workout_form.html')

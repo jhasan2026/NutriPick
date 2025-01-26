@@ -14,4 +14,7 @@ workout/__pycache__/
 workout/migrations/__pycache__
 db.sqlite3
 .env
+*.pyc
 
+
+"db.sqlite3" 
