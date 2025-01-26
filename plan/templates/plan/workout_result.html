@@ -1,11 +1,45 @@
 {% extends 'user/base.html' %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
-    <h1 class="text-2xl font-bold mb-4">Your 7-Day Workout Plan</h1>
-    <pre class="bg-gray-200 p-4 rounded">{{ workout_plan }}</pre>
-    <a href="{% url 'plan:workout_plan' %}" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-        Generate Another Plan
-    </a>
+<div class="max-w-4xl mx-auto bg-white shadow-xl rounded-xl p-6 space-y-6">
+    <h1 class="text-3xl font-extrabold text-center text-green-700 mb-6 flex justify-center items-center space-x-2">
+        <svg class="w-6 h-6 text-green-700" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13h-2v4H7l5 5 5-5h-3V5z" clip-rule="evenodd" />
+        </svg>
+        <span>Your 7-Day Workout Plan</span>
+    </h1>
+
+    <div id="workout-content" class="bg-gray-100 p-6 rounded-xl shadow-inner">
+        <!-- Render the formatted plan with the safe filter to allow HTML rendering -->
+        <div class="space-y-4">
+            {{ plan_home|safe }}
+        </div>
+    </div>
+
+    <div class="text-center mt-6">
+        <button id="download-pdf" class="bg-green-700 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-green-800">
+            Generate PDF
+        </button>
+    </div>
 </div>
+
+<!-- Include html2pdf.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+<script>
+    document.getElementById('download-pdf').addEventListener('click', () => {
+        // Target only the workout content container
+        const element = document.getElementById('workout-content');
+        const opt = {
+            margin: 10, // Margin in mm
+            filename: 'workout-plan.pdf', // PDF file name
+            image: { type: 'jpeg', quality: 0.98 }, // Image quality
+            html2canvas: { scale: 2 }, // Canvas resolution
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } // A4 size
+        };
+        
+        // Generate PDF with html2pdf.js
+        html2pdf().from(element).set(opt).save();
+    });
+</script>
 {% endblock %}

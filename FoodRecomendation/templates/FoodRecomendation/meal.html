@@ -1,24 +1,73 @@
 {% extends 'user/Base.html' %}
 
 {% block content %}
-    <!-- Main container for meal suggestions page -->
-    <div class="max-w-3xl mx-auto p-8 bg-[#FFFFFFCF] rounded-lg shadow-md mt-8">
+  <!-- Main container for meal suggestions page -->
+  <div
+    class="container max-w-2xl mx-auto px-6 py-8 bg-white rounded-lg shadow-lg mb-8 mt-8"
+  >
+    <!-- Heading Section -->
+    <div class="flex justify-center items-center mb-6 px-6 py-8 rounded-lg shadow" style="background-color: #E7F6EE;">
+        <i class="fa-solid fa-utensils text-gray-800 text-4xl mr-3"></i>
+        <h1 class="text-3xl font-bold text-gray-800">Meal Suggestions</h1>
+      </div>
+      
 
-        <!-- Heading Section -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-blue-600 mb-4">Meal Suggestions</h1>
-            <p class="text-lg text-gray-600">Personalized meal plans to suit your dietary needs</p>
-        </div>
+    <!-- Form for user input -->
+    <form method="POST" class="p-6 rounded-lg shadow-md space-y-4">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label for="daily_calories" class="block text-sm font-medium text-gray-700">
+          Daily Calories Need
+        </label>
+        <input
+          type="number"
+          id="daily_calories"
+          name="daily_calories"
+          required
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-200 focus:border-lime-200"
+        />
+      </div>
 
-        <!-- Form for user input -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Enter Your Information</h2>
-            <form method="post" class="space-y-4">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 transition">Submit</button>
-            </form>
+      <fieldset class="space-y-2">
+        <legend class="text-sm font-medium text-gray-700">Diseases</legend>
+        {% for value, label in form.diseases.field.choices %}
+        <div class="flex items-center">
+          <input
+            type="checkbox"
+            id="{{ value }}"
+            name="diseases"
+            value="{{ value }}"
+            class="h-4 w-4 border-gray-300 rounded focus:ring-lime-500 checked:bg-lime-500 !text-lime-500"
+          />
+          <label for="{{ value }}" class="ml-2 block text-sm text-gray-800">
+            {{ label }}
+          </label>
         </div>
-        
-    </div>
+        {% endfor %}
+      </fieldset>
+
+      <div class="mb-4">
+        <label for="budget" class="block text-sm font-medium text-gray-700">Budget</label>
+        <select
+          id="budget"
+          name="budget"
+          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-lime-200 focus:border-lime-200"
+        >
+          {% for value, label in form.budget.field.choices %}
+          <option value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button
+          type="submit"
+          class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm bg-green-700 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Get 7 Day Meal Plan
+        </button>
+      </div>
+    </form>
+  </div>
 {% endblock %}

@@ -9,6 +9,4 @@ urlpatterns = [
     path('register/',register,name='register'),
     path('profile/', profile_update_view, name='profile'),
     path('set_default_image/<int:patient_id>/', set_default_image_view, name='set_default_image'),
-    path('pre_login/',views.pre_login , name='pre_login'),
-
 ]
