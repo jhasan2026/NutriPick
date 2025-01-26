@@ -19,11 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path,include
 from user.views import home
+from user.views import pre_login
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include('posts.urls')),
+    path('newsfeed/', include('posts.urls')),
     path("user/",include('user.urls')),
     path("workout_plan/",include('workout.urls')),
     path('chat/', include('a_rtchat.urls')),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('FoodRecomendation/', include('FoodRecomendation.urls')),
     path('dietitian/',include('Dietitian.urls')),
     path('plan/', include('plan.urls')),
+    path('', pre_login,name='pre_login'),
 
 ]
 
