@@ -181,6 +181,4 @@ if not COHERE_API_KEY:
     raise ValueError("Cohere API key not found. Please set COHERE_API_KEY in your .env file.")
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    ]
+
