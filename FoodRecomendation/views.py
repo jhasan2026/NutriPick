@@ -21,7 +21,7 @@ def get_food_suggestions(data):
     response = requests.post('https://api.cohere.ai/generate', json={
         'prompt': prompt,
         'model': 'command-xlarge-nightly',
-        'max_tokens': 2000,
+        'max_tokens': 1000,
         'temperature': 0.7
     }, headers={
         'Authorization': f'Bearer {settings.COHERE_API_KEY}'

@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "nutri_needs.apps.NutriNeedsConfig",
     'FoodRecomendation',
     'plan',
+    "crispy_tailwind",
 ]
 
 SITE_ID = 1
@@ -182,4 +183,7 @@ if not COHERE_API_KEY:
     raise ValueError("Cohere API key not found. Please set COHERE_API_KEY in your .env file.")
 
 STATIC_URL = '/static/'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"  # Or "bootstrap5"
+CRISPY_TEMPLATE_PACK = "tailwind"
 
