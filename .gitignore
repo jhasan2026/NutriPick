@@ -1,20 +1,50 @@
-nutri_needs/__pycache__/
-NutriPick/__pycache__/
-user/__pycache__/
-a_rtchat/__pycache__/
-a_rtchat/migrations/__pycache__/
-Dietitian/__pycache__/
-Dietitian/migrations/__pycache__/
-FoodRecomendation/__pycache__/
-FoodRecomendation/migrations/__pycache__/
-posts/__pycache__/
-posts/migrations/__pycache__/
-user/migrations/__pycache__/
-workout/__pycache__/
-workout/migrations/__pycache__
-db.sqlite3
-.env
+# Byte-compiled Python files
 *.pyc
+*.pyo
+*.pyd
+__pycache__/
 
+# Environment variables
+.env
 
-"db.sqlite3" 
+# Django-related files
+db.sqlite3
+*.log
+
+# Static and media files
+/staticfiles/
+/media/
+
+# Virtual environment
+venv/
+.env/
+
+# VS Code settings (if applicable)
+.vscode/
+
+# PyCharm settings (if applicable)
+.idea/
+
+# macOS files
+.DS_Store
+
+# Backup files
+*.bak
+*.swp
+*.swo
+
+# Coverage reports
+htmlcov/
+*.cover
+.coverage
+.cache
+
+# Testing-related files
+.tox/
+.pytest_cache/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
