@@ -320,6 +320,12 @@
 
 <!---------------------------------------------------------------------------------------------------------->
 
+<div class="flex justify-center mt-10">
+    <button id="toggleButton" class="px-8 py-4 bg-[#4E6E5D] hover:bg-[#4E6E5D99] text-white text-lg font-semibold rounded-lg shadow-lg">
+        <a href="{% url 'plan_home' %}">Generate 7 Days Workout Plan</a>
+    </button>
+</div>
+
 <section class="relative">
 
 
@@ -356,12 +362,11 @@
                         <a href="{% url 'add_task' %}" class="text-white bg-[#4E6E5D] hover:bg-[#4E6E5D99]  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Task</a>
                     </div>
                 </div>
+
                 <div id="workoutRoutine" class="col-span-12 xl:col-span-7 px-2.5 py-5 sm:p-8 bg-gradient-to-b from-white/25 to-white xl:bg-white rounded-2xl max-xl:row-start-1">
-                    <div class="flex justify-center mt-10">
-                        <button id="toggleButton" class="px-8 py-4 bg-[#4E6E5D] hover:bg-[#4E6E5D99] text-white text-lg font-semibold rounded-lg shadow-lg">
-                          <a href="{% url 'plan_home' %}">Generate 7 Days Workout Plan</a>
-                        </button>
-                      </div>
+                    <button  class="px-2 py-2 bg-[#4E6E5D] hover:bg-[#4E6E5D99] text-white text-lg font-semibold rounded-lg shadow-lg">
+                        <a href="{% url 'workout_plan' %}">Generate Calory Burn</a>
+                    </button>
                                                                                        
                     <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-5">
                         <div class="flex items-center gap-4">

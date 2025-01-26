@@ -36,6 +36,7 @@ CSRF_TRUSTED_ORIGINS = [ 'https://*' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     "user.apps.UserConfig",
     "posts.apps.PostsConfig",
     "workout.apps.WorkoutConfig",
