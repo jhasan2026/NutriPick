@@ -1,10 +1,33 @@
 {% extends 'user/BASE.html' %}
 {% block content %}
 
+<article class="p-6 text-base bg-white border border-gray-200 dark:border-gray-700 dark:bg-gray-900 mb-6 rounded-lg">
+    <header class="mb-4">
+        <div class="flex items-center">
+            <img class="w-10 h-10 rounded-full mr-3" src="{{ post.author.patient.image.url }}" alt="Author Image">
+            <div>
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white">{{ post.author.username }}</h2>
+                <time class="text-sm text-gray-500 dark:text-gray-400" datetime="{{ post.updated_at }}">
+                    {{ post.updated_at }}
+                </time>
+            </div>
+        </div>
+    </header>
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">{{ post.title }}</h1>
+        <p class="text-gray-700 dark:text-gray-300">{{ post.content }}</p>
+        {% if post.image %}
+        <div class="mt-4">
+            <img class="w-full rounded-lg" src="{{ post.image.url }}" alt="Post Image">
+        </div>
+        {% endif %}
+    </div>
+</article>
+
 <section class="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
     <div class="max-w-2xl mx-auto px-4">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion (20)</h2>
+            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">Discussion</h2>
         </div>
         <form method="post">
             {% csrf_token %}
@@ -64,24 +87,8 @@
 </section>
 
 
-<!--<h3>Add a Comment</h3>-->
-<!--<form method="post">-->
-<!--    {% csrf_token %}-->
 
-<!--    &lt;!&ndash; Content Field &ndash;&gt;-->
-<!--    <div>-->
-<!--        <label for="id_content">Comment</label>-->
-<!--        <textarea id="id_content" name="content">{{ comment_form.content.value|default_if_none:'' }}</textarea>-->
-<!--        {% if comment_form.content.errors %}-->
-<!--        <div class="error">-->
-<!--            {{ comment_form.content.errors }}-->
-<!--        </div>-->
-<!--        {% endif %}-->
-<!--    </div>-->
 
-<!--    &lt;!&ndash; Submit Button &ndash;&gt;-->
-<!--    <button type="submit">Submit Comment</button>-->
-<!--</form>-->
 
 
 {% endblock %}

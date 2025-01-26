@@ -89,3 +89,11 @@ def delete_comment(request, comment_id):
 
     return render(request, 'posts/confirm_delete.html', {'comment': comment})
 
+from django.shortcuts import get_object_or_404, render
+
+
+def s_post_detail(request, post_id):
+    # Fetch the specific post using its ID
+    post = get_object_or_404(Post, id=post_id)
+    comments = post.comments.all()  # Assuming your post model is related to comments
+    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments})
