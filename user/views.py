@@ -28,6 +28,9 @@ Calory_Need_Predictor = joblib.load('CaloryPredictionModel/Calory_Need_Predictor
 def home(request):
     return render(request,'user/BASE.html')
 
+def pre_login(request):
+    return render(request, 'user/pre_login.html')
+
 
 def register(request):
     if request.method == 'POST':
