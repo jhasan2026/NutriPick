@@ -2,12 +2,6 @@
 {% block content %}
 
 
-<!-- drawer init and show -->
-<div class="text-center py-4 bg-[#FFFFFFCF]">
-    <button class="text-white bg-[#4E6E5D] hover:bg-[#4E6E5D99]  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-timepicker" data-drawer-show="drawer-timepicker" aria-controls="drawer-timepicker">
-        Set time schedule
-    </button>
-</div>
 
 
 <!-- drawer component -->
@@ -49,7 +43,7 @@
                     </div>
                 </div>
                 <div class="w-32 mx-auto">
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Exercise</label>
+                    <label class="block text-sm font-medium text-gray-900 dark:text-white "></label>
                     <select id="sat_work"  name="sat_work" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         <option value="No" {% if workout_data.sat_work == 'No' %} selected {% endif %}>No Workout</option>
                         <option value="Strength" {% if workout_data.sat_work == 'Strength' %} selected {% endif %}>Strength</option>
@@ -318,13 +312,6 @@
 
 
 
-<!---------------------------------------------------------------------------------------------------------->
-
-<div class="flex justify-center mt-10">
-    <button id="toggleButton" class="px-8 py-4 bg-[#4E6E5D] hover:bg-[#4E6E5D99] text-white text-lg font-semibold rounded-lg shadow-lg">
-        <a href="{% url 'plan_home' %}">Generate 7 Days Workout Plan</a>
-    </button>
-</div>
 
 <section class="relative">
 
@@ -337,23 +324,24 @@
         <div class="w-full max-w-7xl mx-auto px-2 lg:px-8">
             <div class="grid grid-cols-12 gap-8 max-w-4xl mx-auto xl:max-w-full">
                 <div class="col-span-12 xl:col-span-5 bg-[#FFFFFFCF] p-4">
-                    <h2 class="font-manrope text-3xl leading-tight text-gray-900 mb-1.5">Upcoming Events</h2>
-                    <p class="text-lg font-normal text-gray-600 mb-8">Don’t miss schedule</p>
+                    <h2 class="font-manrope text-3xl leading-tight text-gray-900 mb-2 mt-6">To do list</h2>
                     <div class="flex gap-5 flex-col">
                         {% for event in eventList %}
 
                                 <div class="p-6 rounded-xl bg-white">
                                 <div class="flex items-center justify-between mb-3">
                                     <div class="flex items-center gap-2.5">
-                                        <span><a href="{% url 'delete_task' event.id %}" ><div class="w-6 h-6 bg-indigo-50 border-2 border-blue-400 rounded shadow-lg"></div></a></span>
-                                        <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span>
-                                        <p class="text-base font-medium text-gray-900">{{ event.event_date|date:"b d, Y"|capfirst }} &nbsp;&nbsp;&nbsp;  {% if event.starting_time %}  {{ event.starting_time }} {% endif %} {% if event.ending_time %} - {{ event.ending_time }} {% endif %}</p>
+                                        <span><a href="{% url 'delete_task' event.id %}" ><div class="w-6 h-6 bg-indigo-50 border-2 border-blue-400 rounded shadow-lg mr-4"></div></a></span>
+                                        <a href="{% url 'update_task' event.id %}">
+                                            <h6 class="text-xl leading-8 font-semibold text-black mb-1">{{ event.title }}</h6>
+                                            <p class="text-base font-normal text-gray-600">{{ event.details }}</p>
+                                            <p class="text-base font-medium text-gray-900">{{ event.event_date|date:"b d, Y"|capfirst }} &nbsp;&nbsp;&nbsp;  {% if event.starting_time %}  {{ event.starting_time }} {% endif %} {% if event.ending_time %} - {{ event.ending_time }} {% endif %}</p>
+                                        </a>
+                                        <span class="w-2.5 h-2.5 rounded-full bg-orange-600"></span>
+                                        
                                     </div>
                                 </div>
-                                <a href="{% url 'update_task' event.id %}">
-                                    <h6 class="text-xl leading-8 font-semibold text-black mb-1">{{ event.title }}</h6>
-                                    <p class="text-base font-normal text-gray-600">{{ event.details }}</p>
-                                </a>
+
                             </div>
 
                         {% endfor %}
@@ -361,16 +349,18 @@
                     <div class="pt-4 flex justify-content-center">
                         <a href="{% url 'add_task' %}" class="text-white bg-[#4E6E5D] hover:bg-[#4E6E5D99]  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Task</a>
                     </div>
+
+
+
                 </div>
 
                 <div id="workoutRoutine" class="col-span-12 xl:col-span-7 px-2.5 py-5 sm:p-8 bg-gradient-to-b from-white/25 to-white xl:bg-white rounded-2xl max-xl:row-start-1">
-                    <button  class="px-2 py-2 bg-[#4E6E5D] hover:bg-[#4E6E5D99] text-white text-lg font-semibold rounded-lg shadow-lg">
-                        <a href="{% url 'workout_plan' %}">Generate Calory Burn</a>
-                    </button>
+
+                    
                                                                                        
                     <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-5">
                         <div class="flex items-center gap-4">
-                            <h5 class="text-xl leading-8 font-semibold text-gray-900">Workout Routine</h5>
+                            <h2 class="font-manrope text-3xl leading-tight text-gray-900 mb-2 mt-2">Workout Routine</h2>
                         </div>
                     </div>
                     <div class="border border-indigo-200 rounded-xl">
@@ -456,6 +446,25 @@
                         </div>
 
                     </div>
+
+                    <button
+                    class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-lg font-semibold"
+                    type="button"
+                    data-drawer-target="drawer-timepicker"
+                    data-drawer-show="drawer-timepicker"
+                    aria-controls="drawer-timepicker"
+                  >
+                    Set time schedule
+                  </button>
+
+                    <button class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-lg font-semibold mt-8">
+                        <a href="{% url 'workout_plan' %}" class="text-white">Generate Calory Burn</a>
+                    </button>
+
+                  <h2 class="font-manrope text-3xl leading-tight text-gray-900 mb-2 mt-2">Want us to make a plan for you..?</h2>
+                  <button id="toggleButton" class="inline-block bg-green-600 hover:bg-green-500 text-white px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition duration-200 text-lg font-semibold mt-2">
+                    <a href="{% url 'plan_home' %}">Generate 7 Days Workout Plan</a>
+                  </button>
             </div>
 <!--        </div>-->
 <!--    </div>-->
